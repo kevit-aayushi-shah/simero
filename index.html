@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simero Ceramics | Luxury Vitrified Tiles, Morbi</title>
+  <meta name="description" content="Simero Ceramics – premium vitrified tiles and slabs from Morbi, India. Demo website.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #14120f;
+      --ink-2: #2a2622;
+      --cream: #f7f3ec;
+      --sand: #ece4d6;
+      --gold: #b8955a;
+      --gold-2: #d6b97f;
+      --muted: #6f675d;
+      --radius: 14px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: "Inter", system-ui, sans-serif; color: var(--ink); background: var(--cream); line-height: 1.6; overflow-x: hidden; }
+    h1, h2, h3 { font-family: "Cormorant Garamond", Georgia, serif; font-weight: 600; line-height: 1.1; }
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(1200px, 100% - 32px); margin-inline: auto; }
+    .eyebrow { text-transform: uppercase; letter-spacing: .28em; font-size: .75rem; color: var(--gold); font-weight: 600; }
+    .btn { display: inline-block; padding: 14px 30px; border-radius: 999px; font-weight: 500; font-size: .95rem; transition: .25s; cursor: pointer; border: 1px solid transparent; }
+    .btn-gold { background: var(--gold); color: #fff; }
+    .btn-gold:hover { background: #a1804a; }
+    .btn-ghost { border-color: rgba(255,255,255,.6); color: #fff; }
+    .btn-ghost:hover { background: rgba(255,255,255,.12); }
+    section { padding: 100px 0; }
+    .section-head { text-align: center; max-width: 680px; margin: 0 auto 56px; }
+    .section-head h2 { font-size: clamp(2.2rem, 4vw, 3.2rem); margin: 12px 0 14px; }
+    .section-head p { color: var(--muted); }
+
+    /* Marble textures (pure CSS so the page has no external image dependencies) */
+    .m-white { background: linear-gradient(115deg, transparent 40%, rgba(150,140,125,.35) 41%, transparent 43%), linear-gradient(35deg, transparent 60%, rgba(160,150,135,.25) 61%, transparent 62.5%), radial-gradient(circle at 30% 30%, #fff, #ece8e1 70%); }
+    .m-black { background: linear-gradient(120deg, transparent 38%, rgba(214,185,127,.55) 39%, transparent 40.5%), linear-gradient(20deg, transparent 65%, rgba(255,255,255,.18) 66%, transparent 67%), radial-gradient(circle at 70% 20%, #3a3530, #121010 75%); }
+    .m-beige { background: linear-gradient(140deg, transparent 45%, rgba(120,95,60,.3) 46%, transparent 48%), linear-gradient(60deg, transparent 25%, rgba(255,255,255,.4) 26%, transparent 27.5%), radial-gradient(circle at 40% 60%, #efe1c8, #cdb48e 80%); }
+    .m-grey { background: linear-gradient(105deg, transparent 50%, rgba(255,255,255,.45) 51%, transparent 52.5%), linear-gradient(160deg, transparent 30%, rgba(60,60,60,.25) 31%, transparent 32%), radial-gradient(circle at 50% 50%, #b9b8b4, #7d7b77 85%); }
+    .m-green { background: linear-gradient(125deg, transparent 42%, rgba(255,255,255,.4) 43%, transparent 44.5%), linear-gradient(40deg, transparent 58%, rgba(200,230,210,.3) 59%, transparent 60%), radial-gradient(circle at 30% 70%, #2f5c4a, #0f2a20 85%); }
+    .m-onyx { background: linear-gradient(95deg, transparent 35%, rgba(255,255,255,.5) 36%, transparent 38%), linear-gradient(15deg, transparent 55%, rgba(180,120,60,.35) 56%, transparent 58%), radial-gradient(circle at 60% 40%, #f5d7a8, #c98c4a 85%); }
+    .m-cement { background: radial-gradient(circle at 20% 20%, rgba(255,255,255,.25), transparent 40%), radial-gradient(circle at 80% 70%, rgba(0,0,0,.12), transparent 45%), linear-gradient(180deg, #a8a29a, #8d877f); }
+    .m-wood { background: repeating-linear-gradient(90deg, rgba(0,0,0,.06) 0 2px, transparent 2px 22px), repeating-linear-gradient(90deg, rgba(255,255,255,.06) 0 1px, transparent 1px 9px), linear-gradient(180deg, #a87a4f, #7b5434); }
+
+    /* Header */
+    header { position: fixed; inset: 0 0 auto; z-index: 50; transition: .3s; }
+    header.scrolled { background: rgba(20,18,15,.92); backdrop-filter: blur(10px); box-shadow: 0 4px 20px rgba(0,0,0,.2); }
+    .nav { display: flex; align-items: center; justify-content: space-between; height: 78px; color: #fff; }
+    .logo { font-family: "Cormorant Garamond", serif; font-size: 1.9rem; font-weight: 700; letter-spacing: .2em; }
+    .logo span { color: var(--gold-2); }
+    .nav ul { display: flex; gap: 34px; list-style: none; font-size: .9rem; }
+    .nav ul a { opacity: .85; transition: .2s; }
+    .nav ul a:hover { opacity: 1; color: var(--gold-2); }
+    .menu-btn { display: none; background: none; border: 0; color: #fff; font-size: 1.6rem; cursor: pointer; }
+
+    /* Hero */
+    .hero { min-height: 100vh; display: flex; align-items: center; position: relative; color: #fff; padding: 140px 0 100px; }
+    .hero::before { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(10,9,8,.85) 0%, rgba(10,9,8,.55) 55%, rgba(10,9,8,.25) 100%); }
+    .hero .m-black { position: absolute; inset: 0; z-index: -1; }
+    .hero-inner { position: relative; display: grid; grid-template-columns: 1.2fr 1fr; gap: 48px; align-items: center; }
+    .hero h1 { font-size: clamp(2.8rem, 6.5vw, 5.4rem); margin: 18px 0 22px; }
+    .hero h1 em { color: var(--gold-2); font-style: italic; }
+    .hero p { font-size: 1.1rem; max-width: 540px; opacity: .85; margin-bottom: 36px; }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+    .hero-tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; transform: rotate(-4deg); }
+    .hero-tiles div { aspect-ratio: 1/1.4; border-radius: 10px; box-shadow: 0 25px 50px rgba(0,0,0,.5); border: 1px solid rgba(255,255,255,.15); }
+    .hero-tiles div:nth-child(2) { transform: translateY(40px); }
+    .hero-tiles div:nth-child(3) { transform: translateY(-20px); }
+    .hero-tiles div:nth-child(4) { transform: translateY(20px); }
+
+    /* Stats */
+    .stats { background: var(--ink); color: #fff; padding: 60px 0; }
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; text-align: center; }
+    .stats strong { display: block; font-family: "Cormorant Garamond", serif; font-size: 3rem; color: var(--gold-2); line-height: 1; }
+    .stats span { font-size: .85rem; opacity: .7; letter-spacing: .08em; text-transform: uppercase; }
+
+    /* About */
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 70px; align-items: center; }
+    .about-visual { position: relative; aspect-ratio: 4/5; border-radius: var(--radius); }
+    .about-visual .badge { position: absolute; right: -24px; bottom: 40px; background: var(--gold); color: #fff; padding: 26px 30px; border-radius: var(--radius); box-shadow: 0 20px 40px rgba(0,0,0,.2); }
+    .about-visual .badge strong { font-family: "Cormorant Garamond", serif; font-size: 2.6rem; display: block; line-height: 1; }
+    .about h2 { font-size: clamp(2.2rem, 4vw, 3.2rem); margin: 12px 0 22px; }
+    .about p { color: var(--muted); margin-bottom: 18px; }
+    .checks { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 26px 0 34px; }
+    .checks li { padding-left: 28px; position: relative; font-weight: 500; font-size: .95rem; }
+    .checks li::before { content: "◆"; position: absolute; left: 0; color: var(--gold); font-size: .8rem; top: 3px; }
+
+    /* Collections */
+    .collections { background: var(--sand); }
+    .filters { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-bottom: 40px; }
+    .filters button { border: 1px solid #cdbfa8; background: transparent; padding: 9px 20px; border-radius: 999px; font: inherit; font-size: .88rem; cursor: pointer; transition: .2s; }
+    .filters button.active, .filters button:hover { background: var(--ink); color: #fff; border-color: var(--ink); }
+    .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
+    .card { background: #fff; border-radius: var(--radius); overflow: hidden; transition: .3s; box-shadow: 0 2px 10px rgba(0,0,0,.04); }
+    .card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(0,0,0,.12); }
+    .card .swatch { aspect-ratio: 1/1; }
+    .card .info { padding: 18px 20px 22px; }
+    .card h3 { font-size: 1.5rem; }
+    .card p { font-size: .82rem; color: var(--muted); }
+    .card .tag { display: inline-block; margin-top: 10px; font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); font-weight: 600; }
+    .card.hide { display: none; }
+
+    /* Sizes */
+    .sizes-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; align-items: end; }
+    .size { text-align: center; }
+    .size .box { margin: 0 auto 16px; border: 1.5px solid var(--gold); border-radius: 6px; background: linear-gradient(135deg, #fff, #f1ebe0); }
+    .size strong { font-family: "Cormorant Garamond", serif; font-size: 1.5rem; display: block; }
+    .size span { font-size: .82rem; color: var(--muted); }
+
+    /* Spaces */
+    .spaces { background: var(--ink); color: #fff; }
+    .spaces .section-head p { color: rgba(255,255,255,.65); }
+    .spaces-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+    .space { position: relative; border-radius: var(--radius); overflow: hidden; aspect-ratio: 4/5; display: flex; align-items: flex-end; padding: 28px; }
+    .space::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,.75)); }
+    .space div { position: relative; z-index: 1; }
+    .space h3 { font-size: 2rem; }
+    .space p { font-size: .9rem; opacity: .8; }
+
+    /* Why */
+    .why-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
+    .why { background: #fff; padding: 34px 28px; border-radius: var(--radius); border: 1px solid #eadfcd; }
+    .why .ic { width: 52px; height: 52px; border-radius: 50%; background: var(--sand); display: grid; place-items: center; font-size: 1.4rem; margin-bottom: 20px; color: var(--gold); }
+    .why h3 { font-size: 1.5rem; margin-bottom: 8px; }
+    .why p { font-size: .9rem; color: var(--muted); }
+
+    /* Testimonials */
+    .testimonials { background: var(--sand); }
+    .t-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+    .t { background: #fff; padding: 34px; border-radius: var(--radius); }
+    .t blockquote { font-family: "Cormorant Garamond", serif; font-size: 1.35rem; line-height: 1.4; margin-bottom: 22px; }
+    .t cite { font-style: normal; font-weight: 600; font-size: .9rem; }
+    .t cite span { display: block; font-weight: 400; color: var(--muted); font-size: .82rem; }
+
+    /* Contact */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 50px; }
+    .contact-info h2 { font-size: clamp(2.2rem, 4vw, 3.2rem); margin: 12px 0 20px; }
+    .contact-info p { color: var(--muted); margin-bottom: 30px; }
+    .info-row { display: flex; gap: 16px; margin-bottom: 22px; }
+    .info-row .ic { flex: none; width: 44px; height: 44px; border-radius: 50%; background: var(--ink); color: var(--gold-2); display: grid; place-items: center; }
+    .info-row strong { display: block; font-size: .8rem; text-transform: uppercase; letter-spacing: .1em; color: var(--gold); }
+    form { background: #fff; padding: 40px; border-radius: var(--radius); box-shadow: 0 20px 50px rgba(0,0,0,.06); display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    form .full { grid-column: 1 / -1; }
+    label { font-size: .8rem; font-weight: 500; display: block; margin-bottom: 6px; }
+    input, select, textarea { width: 100%; padding: 13px 15px; border: 1px solid #ddd3c3; border-radius: 8px; font: inherit; font-size: .95rem; background: var(--cream); }
+    input:focus, select:focus, textarea:focus { outline: 2px solid var(--gold-2); border-color: transparent; }
+    textarea { min-height: 110px; resize: vertical; }
+    .form-msg { grid-column: 1 / -1; color: #2f6b43; font-weight: 500; display: none; }
+
+    /* Footer */
+    footer { background: #0d0c0a; color: rgba(255,255,255,.7); padding: 70px 0 30px; font-size: .9rem; }
+    .f-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 50px; }
+    footer h4 { color: #fff; font-size: .8rem; letter-spacing: .15em; text-transform: uppercase; margin-bottom: 18px; }
+    footer ul { list-style: none; display: grid; gap: 10px; }
+    footer a:hover { color: var(--gold-2); }
+    .f-bottom { border-top: 1px solid rgba(255,255,255,.1); padding-top: 26px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; font-size: .8rem; }
+
+    .reveal { opacity: 0; transform: translateY(30px); transition: .8s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+
+    @media (max-width: 1000px) {
+      .grid, .why-grid { grid-template-columns: repeat(2, 1fr); }
+      .sizes-grid { grid-template-columns: repeat(3, 1fr); row-gap: 40px; }
+      .f-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 820px) {
+      section { padding: 72px 0; }
+      .nav ul { display: none; position: absolute; top: 78px; left: 0; right: 0; flex-direction: column; gap: 0; background: rgba(20,18,15,.97); padding: 10px 16px 20px; }
+      .nav ul.open { display: flex; }
+      .nav ul li a { display: block; padding: 12px 0; }
+      .menu-btn { display: block; }
+      header { background: rgba(20,18,15,.92); }
+      .hero-inner, .about-grid, .contact-grid { grid-template-columns: 1fr; }
+      .hero-tiles { max-width: 360px; margin: 30px auto 0; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .spaces-grid, .t-grid { grid-template-columns: 1fr; }
+      .about-visual { max-width: 460px; }
+      .about-visual .badge { right: 12px; }
+    }
+    @media (max-width: 540px) {
+      .grid, .why-grid, .checks, .f-grid { grid-template-columns: 1fr; }
+      .sizes-grid { grid-template-columns: 1fr 1fr; }
+      form { grid-template-columns: 1fr; padding: 26px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header id="header">
+    <div class="container nav">
+      <a href="#home" class="logo">SIM<span>E</span>RO</a>
+      <button class="menu-btn" id="menuBtn" aria-label="Open menu">☰</button>
+      <ul id="navList">
+        <li><a href="#about">About</a></li>
+        <li><a href="#collections">Collections</a></li>
+        <li><a href="#sizes">Sizes</a></li>
+        <li><a href="#spaces">Spaces</a></li>
+        <li><a href="#why">Why Simero</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero" id="home">
+    <div class="m-black"></div>
+    <div class="container hero-inner">
+      <div>
+        <span class="eyebrow">Luxury Vitrified Tiles · Morbi, India</span>
+        <h1>Surfaces that define <em>timeless</em> spaces</h1>
+        <p>Premium glazed vitrified tiles and large-format slabs, crafted in Morbi with diamond and gold-gleaming finishes for homes, hotels and landmark projects worldwide.</p>
+        <div class="hero-actions">
+          <a href="#collections" class="btn btn-gold">Explore Collections</a>
+          <a href="#contact" class="btn btn-ghost">Request a Catalogue</a>
+        </div>
+      </div>
+      <div class="hero-tiles" aria-hidden="true">
+        <div class="m-white"></div>
+        <div class="m-onyx"></div>
+        <div class="m-green"></div>
+        <div class="m-beige"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="container stats-grid">
+      <div><strong>30+</strong><span>Years of Group Legacy</span></div>
+      <div><strong>1000+</strong><span>Designs</span></div>
+      <div><strong>50+</strong><span>Export Countries</span></div>
+      <div><strong>1200×2400</strong><span>Largest Slab (mm)</span></div>
+    </div>
+  </div>
+
+  <!-- About -->
+  <section class="about" id="about">
+    <div class="container about-grid">
+      <div class="about-visual m-white reveal">
+        <div class="badge"><strong>Since 1990</strong>Crafting ceramic excellence</div>
+      </div>
+      <div class="reveal">
+        <span class="eyebrow">About Simero</span>
+        <h2>One of Morbi's leading makers of premium vitrified tiles</h2>
+        <p>Simero Ceramics brings together advanced digital printing, high-pressure pressing and rigorous quality control to produce tiles that are as durable as they are beautiful.</p>
+        <p>From statement marble-look slabs to rugged outdoor pavers, every Simero surface is designed to elevate interiors and exteriors alike.</p>
+        <ul class="checks">
+          <li>Glazed Vitrified Tiles</li>
+          <li>Polished Glazed Vitrified</li>
+          <li>Double Charge Tiles</li>
+          <li>Full Body Outdoor Tiles</li>
+          <li>Large Format Slabs</li>
+          <li>Diamond &amp; Gold Finishes</li>
+        </ul>
+        <a href="#contact" class="btn btn-gold">Talk to Our Team</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Collections -->
+  <section class="collections" id="collections">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Our Collections</span>
+        <h2>Designed to inspire</h2>
+        <p>Explore signature series spanning marble, stone, cement and wood aesthetics in glossy, matt and carving finishes.</p>
+      </div>
+      <div class="filters" id="filters">
+        <button class="active" data-f="all">All</button>
+        <button data-f="marble">Marble</button>
+        <button data-f="stone">Stone &amp; Cement</button>
+        <button data-f="premium">Premium Finishes</button>
+        <button data-f="outdoor">Outdoor</button>
+      </div>
+      <div class="grid" id="grid">
+        <div class="card reveal" data-c="marble"><div class="swatch m-white"></div><div class="info"><h3>Aura</h3><p>800×1600 mm · Glossy</p><span class="tag">Marble</span></div></div>
+        <div class="card reveal" data-c="premium"><div class="swatch m-black"></div><div class="info"><h3>Diamond 2.0</h3><p>1200×2400 mm · High Gloss</p><span class="tag">Premium</span></div></div>
+        <div class="card reveal" data-c="stone"><div class="swatch m-cement"></div><div class="info"><h3>Cementa</h3><p>600×1200 mm · Matt</p><span class="tag">Cement</span></div></div>
+        <div class="card reveal" data-c="marble"><div class="swatch m-beige"></div><div class="info"><h3>Bliss</h3><p>800×1600 mm · Satin</p><span class="tag">Marble</span></div></div>
+        <div class="card reveal" data-c="premium"><div class="swatch m-onyx"></div><div class="info"><h3>Opula</h3><p>1200×1800 mm · Gold Gleam</p><span class="tag">Premium</span></div></div>
+        <div class="card reveal" data-c="marble"><div class="swatch m-green"></div><div class="info"><h3>Chromatic</h3><p>800×1600 mm · Glossy</p><span class="tag">Marble</span></div></div>
+        <div class="card reveal" data-c="outdoor"><div class="swatch m-grey"></div><div class="info"><h3>Rock Solid</h3><p>600×600 mm · Full Body</p><span class="tag">Outdoor</span></div></div>
+        <div class="card reveal" data-c="stone"><div class="swatch m-wood"></div><div class="info"><h3>Serenity</h3><p>200×1200 mm · Wood Matt</p><span class="tag">Wood</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sizes -->
+  <section id="sizes">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Formats</span>
+        <h2>Every size, every space</h2>
+        <p>From classic squares to seamless large-format slabs that reduce grout lines and amplify a sense of space.</p>
+      </div>
+      <div class="sizes-grid reveal">
+        <div class="size"><div class="box" style="width:60px;height:60px"></div><strong>600×600</strong><span>Floors &amp; walls</span></div>
+        <div class="size"><div class="box" style="width:60px;height:120px"></div><strong>600×1200</strong><span>Versatile planks</span></div>
+        <div class="size"><div class="box" style="width:80px;height:160px"></div><strong>800×1600</strong><span>Slab format</span></div>
+        <div class="size"><div class="box" style="width:120px;height:180px"></div><strong>1200×1800</strong><span>Feature walls</span></div>
+        <div class="size"><div class="box" style="width:120px;height:240px"></div><strong>1200×2400</strong><span>Grand slabs</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Spaces -->
+  <section class="spaces" id="spaces">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Applications</span>
+        <h2>Made for the spaces you live in</h2>
+        <p>Engineered for performance across residential, commercial and hospitality projects.</p>
+      </div>
+      <div class="spaces-grid">
+        <div class="space m-beige reveal"><div><h3>Living Rooms</h3><p>Expansive slabs for an effortless, luxurious flow.</p></div></div>
+        <div class="space m-green reveal"><div><h3>Bathrooms</h3><p>Water-resistant finishes with spa-like elegance.</p></div></div>
+        <div class="space m-grey reveal"><div><h3>Outdoors</h3><p>Anti-skid, frost-resistant full body pavers.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why -->
+  <section id="why">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Why Simero</span>
+        <h2>Quality you can stand on</h2>
+      </div>
+      <div class="why-grid">
+        <div class="why reveal"><div class="ic">◆</div><h3>Low Water Absorption</h3><p>Dense vitrified body below 0.5% absorption for long-lasting strength.</p></div>
+        <div class="why reveal"><div class="ic">✦</div><h3>HD Digital Print</h3><p>True-to-nature veining and textures with high-definition inkjet technology.</p></div>
+        <div class="why reveal"><div class="ic">⬡</div><h3>Scratch Resistant</h3><p>Hard-wearing surfaces built for heavy footfall in homes and businesses.</p></div>
+        <div class="why reveal"><div class="ic">✈</div><h3>Global Export</h3><p>Export-grade packaging and timely dispatch to clients across the world.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="testimonials">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Testimonials</span>
+        <h2>Trusted by architects &amp; dealers</h2>
+      </div>
+      <div class="t-grid">
+        <div class="t reveal"><blockquote>"The 800×1600 slabs transformed our hotel lobby. Consistent shade and flawless finish."</blockquote><cite>Project Architect<span>Hospitality project</span></cite></div>
+        <div class="t reveal"><blockquote>"Wide range, reliable dispatch and excellent support. Our customers love the designs."</blockquote><cite>Tile Dealer<span>Distribution partner</span></cite></div>
+        <div class="t reveal"><blockquote>"The gold-gleam finish gives our villas a truly premium look at a great value."</blockquote><cite>Builder<span>Residential developer</span></cite></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <div class="container contact-grid">
+      <div class="contact-info reveal">
+        <span class="eyebrow">Get in Touch</span>
+        <h2>Let's build something beautiful</h2>
+        <p>Dealer enquiries, project quotes or catalogue requests – our team is happy to help. You can also chat with us using the assistant at the bottom-right.</p>
+        <div class="info-row"><div class="ic">⌂</div><div><strong>Factory</strong>Nichi Mandal, Halvad Road, Morbi, Gujarat, India</div></div>
+        <div class="info-row"><div class="ic">✉</div><div><strong>Email</strong>info@simero.in</div></div>
+        <div class="info-row"><div class="ic">☏</div><div><strong>Hours</strong>Mon – Sat, 9:30 AM – 6:30 PM IST</div></div>
+      </div>
+      <form id="enquiry" class="reveal">
+        <div><label for="name">Full Name</label><input id="name" required></div>
+        <div><label for="phone">Phone</label><input id="phone" type="tel" required></div>
+        <div class="full"><label for="email">Email</label><input id="email" type="email" required></div>
+        <div class="full"><label for="type">I am a</label>
+          <select id="type"><option>Homeowner</option><option>Architect / Designer</option><option>Dealer / Distributor</option><option>Builder / Developer</option><option>Exporter / Importer</option></select>
+        </div>
+        <div class="full"><label for="msg">Message</label><textarea id="msg" placeholder="Tell us about your requirement…"></textarea></div>
+        <div class="full"><button type="submit" class="btn btn-gold">Send Enquiry</button></div>
+        <p class="form-msg" id="formMsg">Thank you! Our team will get back to you shortly.</p>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="f-grid">
+        <div>
+          <a href="#home" class="logo" style="color:#fff">SIM<span>E</span>RO</a>
+          <p style="margin-top:14px;max-width:300px">Luxury vitrified tiles and slabs from Morbi, India – crafted for spaces that last.</p>
+        </div>
+        <div><h4>Explore</h4><ul><li><a href="#about">About</a></li><li><a href="#collections">Collections</a></li><li><a href="#sizes">Sizes</a></li><li><a href="#contact">Contact</a></li></ul></div>
+        <div><h4>Products</h4><ul><li>Glazed Vitrified</li><li>Double Charge</li><li>Large Slabs</li><li>Outdoor Tiles</li></ul></div>
+        <div><h4>Reach Us</h4><ul><li>Morbi, Gujarat</li><li>info@simero.in</li></ul></div>
+      </div>
+      <div class="f-bottom">
+        <span>© 2026 Simero Ceramics. All rights reserved.</span>
+        <span>Demo website for chatbot showcase.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Header background on scroll
+    const header = document.getElementById('header');
+    const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 40);
+    window.addEventListener('scroll', onScroll); onScroll();
+
+    // Mobile menu
+    const navList = document.getElementById('navList');
+    document.getElementById('menuBtn').addEventListener('click', () => navList.classList.toggle('open'));
+    navList.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navList.classList.remove('open')));
+
+    // Collection filters
+    document.getElementById('filters').addEventListener('click', e => {
+      const btn = e.target.closest('button'); if (!btn) return;
+      document.querySelectorAll('#filters button').forEach(b => b.classList.toggle('active', b === btn));
+      const f = btn.dataset.f;
+      document.querySelectorAll('#grid .card').forEach(c => c.classList.toggle('hide', f !== 'all' && c.dataset.c !== f));
+    });
+
+    // Reveal on scroll
+    const io = new IntersectionObserver(entries => entries.forEach(en => {
+      if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+    }), { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    // Demo enquiry form
+    document.getElementById('enquiry').addEventListener('submit', e => {
+      e.preventDefault();
+      document.getElementById('formMsg').style.display = 'block';
+      e.target.reset();
+    });
+  </script>
+
+  <!-- Chatomate web chat widget -->
+  <script>
+    window.customTokens = {
+       botId:"6aa7bbafc03a3ff39f9a9e1c",
+       appSecret:"8ad1dfeae4cadc0198dc3105d369673739dc35abe67ab6ff"
+    };
+    var script = document.createElement('script');
+
+    script.src = "https://sthir.chatomate.in/webchat/v2/webChat.js";
+    document.getElementsByTagName('body')[0].appendChild(script);
+  </script>
+</body>
+</html>

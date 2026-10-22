@@ -68,7 +68,7 @@
   .slide::before, .slide::after { content: ""; position: absolute; border-radius: 50%; filter: blur(80px); z-index: -1; opacity: .22; }
   .slide::before { width: 46%; aspect-ratio: 1; right: -10%; top: -18%; background: var(--c); }
   .slide::after { width: 34%; aspect-ratio: 1; left: -8%; bottom: -20%; background: var(--c2); opacity: .16; }
-  .inner { height: 100%; overflow-y: auto; padding: clamp(22px, 4vw, 52px); display: grid; align-content: start; gap: 26px; }
+  .inner { height: 100%; overflow-y: auto; padding: clamp(22px, 4vw, 52px); display: grid; align-content: start; grid-auto-rows: max-content; gap: 26px; }
   .kicker { display: inline-flex; gap: 10px; align-items: center; font-family: var(--f-mono); font-size: .74rem; letter-spacing: .14em; text-transform: uppercase; color: color-mix(in srgb, var(--c) 72%, var(--ink)); }
   .kicker b { background: var(--c); color: var(--on-c); border-radius: 6px; padding: 2px 8px; font-weight: 600; }
   .slide h2 { font-size: clamp(1.8rem, 3.6vw, 3rem); font-weight: 800; max-width: 22ch; }
@@ -113,6 +113,12 @@
   .strike { padding: 16px; display: grid; gap: 4px; background: color-mix(in srgb, var(--c) var(--p), var(--stage)); }
   .strike b { font-family: var(--f-display); }
   .strike p { font-size: .86rem; color: var(--ink); opacity: .85; }
+
+  /* Future scope */
+  .future-tag { display: inline-flex; align-items: center; gap: 8px; font-family: var(--f-mono); font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; padding: 5px 12px; border-radius: 999px; border: 1px dashed var(--c); color: color-mix(in srgb, var(--c) 72%, var(--ink)); justify-self: start; }
+  .flow { border-radius: 16px; border: 1px solid var(--line); background: var(--stage); padding: 14px; overflow-x: auto; }
+  .flow svg { display: block; width: 100%; min-width: 620px; height: auto; }
+  .flow text { font-family: var(--f-body); }
 
   /* Controls */
   .bar { display: flex; align-items: center; gap: 14px; padding: 0 22px 18px; padding-right: max(22px, env(safe-area-inset-right, 0px)); padding-bottom: max(18px, env(safe-area-inset-bottom, 0px)); }
@@ -367,6 +373,62 @@
       </section>
 
 
+      <section class="slide" id="project" data-name="Future: Project mgmt" style="--c: var(--c-violet); --c2: var(--c-blue)">
+        <div class="inner">
+          <span class="kicker"><b>Next</b> Future scope · Project management</span>
+          <h2>Deliver the chatbot <em>faster and better</em>, and bill sooner.</h2>
+          <p class="lede">The next responsibility the team will take on is running each implementation as a project, from kickoff to the invoice.</p>
+          <figure class="flow" style="margin:0" aria-label="Project timeline from kickoff to billing">
+            <svg viewBox="0 0 900 230" role="img" aria-labelledby="flow-t">
+              <title id="flow-t">Project timeline: kickoff, build, QA, go-live, billing. Delivery time runs from kickoff to go-live; billing time runs from go-live to invoice.</title>
+              <defs>
+                <linearGradient id="trk" x1="0" x2="1" y1="0" y2="0">
+                  <stop offset="0" stop-color="#0099ff"/><stop offset=".55" stop-color="#7b4dff"/><stop offset="1" stop-color="#12b37a"/>
+                </linearGradient>
+              </defs>
+              <path d="M90 58 V44 H650 V58" fill="none" stroke="#0099ff" stroke-width="2"/>
+              <text x="370" y="32" text-anchor="middle" font-size="15" font-weight="700" fill="#0b1b33">Delivery time · faster, first-time-right</text>
+              <path d="M650 58 V44 H810 V58" fill="none" stroke="#12b37a" stroke-width="2"/>
+              <text x="730" y="32" text-anchor="middle" font-size="15" font-weight="700" fill="#0b1b33">Billing time</text>
+              <rect x="90" y="112" width="720" height="10" rx="5" fill="url(#trk)"/>
+              <g font-size="14" text-anchor="middle" fill="#0b1b33">
+                <circle cx="90" cy="117" r="26" fill="#ffffff" stroke="#0099ff" stroke-width="4"/><text x="90" y="122" font-weight="700" fill="#0099ff">1</text>
+                <text x="90" y="170" font-weight="700">Kickoff</text><text x="90" y="190" fill="#55657f" font-size="12">Scope + milestones</text>
+                <circle cx="277" cy="117" r="26" fill="#ffffff" stroke="#3a8dff" stroke-width="4"/><text x="277" y="122" font-weight="700" fill="#3a8dff">2</text>
+                <text x="277" y="170" font-weight="700">Build</text><text x="277" y="190" fill="#55657f" font-size="12">Flows + chatbot</text>
+                <circle cx="463" cy="117" r="26" fill="#ffffff" stroke="#7b4dff" stroke-width="4"/><text x="463" y="122" font-weight="700" fill="#7b4dff">3</text>
+                <text x="463" y="170" font-weight="700">QA</text><text x="463" y="190" fill="#55657f" font-size="12">Test before handover</text>
+                <circle cx="650" cy="117" r="26" fill="#ffffff" stroke="#f0357f" stroke-width="4"/><text x="650" y="122" font-weight="700" fill="#f0357f">4</text>
+                <text x="650" y="170" font-weight="700">Go-live</text><text x="650" y="190" fill="#55657f" font-size="12">Client sign-off</text>
+                <circle cx="810" cy="117" r="26" fill="#12b37a"/><text x="810" y="123" font-weight="700" fill="#ffffff" font-size="16">₹</text>
+                <text x="810" y="170" font-weight="700">Billing</text><text x="810" y="190" fill="#55657f" font-size="12">Invoice raised</text>
+              </g>
+            </svg>
+          </figure>
+          <div class="two">
+            <div class="panel fill">
+              <span class="tag">Faster, better delivery</span>
+              <h3>How quickly a quality chatbot goes live</h3>
+              <ul>
+                <li>Days from kickoff to go-live for each chatbot</li>
+                <li>Milestones planned at kickoff and shared with the client</li>
+                <li>First-time-right handover: no rework after QA</li>
+                <li>Risks and blockers flagged before they cause delay</li>
+              </ul>
+            </div>
+            <div class="panel fill" style="--c: var(--c-green)">
+              <span class="tag">Quicker billing</span>
+              <h3>How quickly we bill after delivery</h3>
+              <ul>
+                <li>Days from go-live to invoice raised</li>
+                <li>Billing milestones agreed with the client at kickoff</li>
+                <li>Client sign-off collected on the day of go-live</li>
+                <li>Payment followed up until it is received</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
     <div class="bar">
       <button class="arrow" id="prev" type="button" aria-label="Previous slide">←</button>

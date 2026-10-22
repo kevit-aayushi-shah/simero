@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>CSM Team Charter</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  /* Layout: navy masthead band, then a sticky pillar index beside long-form pillar sections, ending in a scorecard tool.
+     Theme approximates kevit.io (navy + Kevit blue). Swap the tokens below to match exact brand values. */
+  :root {
+    --bg: #f5f7fc;
+    --surface: #ffffff;
+    --ink: #0e1430;
+    --muted: #59607a;
+    --line: #dfe4f1;
+    --brand: #2554f5;
+    --brand-soft: #e7edff;
+    --band: #0b1130;
+    --band-ink: #eef1ff;
+    --band-muted: #a7b0d6;
+    --good: #138a5a;
+    --warn: #b86e00;
+    --bad: #c23a3a;
+    --good-soft: #e3f5ec;
+    --warn-soft: #fdf1dc;
+    --bad-soft: #fbe6e6;
+    --f-display: "Plus Jakarta Sans", "Segoe UI", system-ui, sans-serif;
+    --f-body: "DM Sans", "Segoe UI", system-ui, sans-serif;
+    --f-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0a0f26; --surface: #121a3a; --ink: #e9ecfa; --muted: #9aa3c7; --line: #232d55;
+      --brand: #6f8dff; --brand-soft: #1b2655; --band: #060a1c; --band-ink: #eef1ff; --band-muted: #9aa3c7;
+      --good: #4cc68f; --warn: #f0a83c; --bad: #ff7b7b; --good-soft: #10301f; --warn-soft: #33250c; --bad-soft: #3a1717;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0a0f26; --surface: #121a3a; --ink: #e9ecfa; --muted: #9aa3c7; --line: #232d55;
+    --brand: #6f8dff; --brand-soft: #1b2655; --band: #060a1c; --band-ink: #eef1ff; --band-muted: #9aa3c7;
+    --good: #4cc68f; --warn: #f0a83c; --bad: #ff7b7b; --good-soft: #10301f; --warn-soft: #33250c; --bad-soft: #3a1717;
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  body { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 16px; line-height: 1.6; margin: 0; }
+  h1, h2, h3, h4 { font-family: var(--f-display); line-height: 1.15; margin: 0; text-wrap: balance; }
+  p { margin: 0; }
+  a { color: var(--brand); }
+  :focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
+  .wrap { max-width: 1160px; margin-inline: auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+  .label { font-family: var(--f-mono); font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: var(--brand); }
+
+  /* Masthead */
+  .mast { background: var(--band); color: var(--band-ink); }
+  .mast .wrap { padding-block: 28px 56px; }
+  .topbar { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; margin-bottom: 48px; }
+  .brand { font-family: var(--f-display); font-weight: 800; font-size: 1.35rem; letter-spacing: -.01em; }
+  .brand span { color: var(--brand); }
+  .topbar nav { display: flex; gap: 20px; flex-wrap: wrap; font-size: .9rem; }
+  .topbar nav a { color: var(--band-muted); text-decoration: none; }
+  .topbar nav a:hover { color: var(--band-ink); }
+  .mast .label { color: #8fa6ff; }
+  .mast h1 { font-size: clamp(2.1rem, 5.2vw, 3.8rem); font-weight: 800; letter-spacing: -.02em; max-width: 18ch; margin: 14px 0 18px; }
+  .mast h1 em { font-style: normal; color: #8fa6ff; }
+  .mast .lede { color: var(--band-muted); max-width: 62ch; font-size: 1.08rem; }
+  .sla-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+  .sla { border: 1px solid rgba(143,166,255,.35); border-radius: 10px; padding: 12px 18px; display: flex; gap: 12px; align-items: baseline; }
+  .sla b { font-family: var(--f-display); font-size: 1.6rem; color: var(--band-ink); font-variant-numeric: tabular-nums; }
+  .sla span { color: var(--band-muted); font-size: .9rem; }
+
+  /* Punchline */
+  .punch { border-bottom: 1px solid var(--line); background: var(--surface); }
+  .punch .wrap { padding-block: 40px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 40px; align-items: start; }
+  .punch h2 { font-size: clamp(1.5rem, 3vw, 2.1rem); }
+  .punch ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 12px; }
+  .punch li { display: grid; grid-template-columns: 22px minmax(0,1fr); gap: 10px; }
+  .punch li::before { content: "→"; color: var(--brand); font-weight: 700; }
+
+  /* Body grid */
+  .layout { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 48px; padding-block: 56px; }
+  .index { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 20px); align-self: start; display: grid; gap: 4px; font-size: .92rem; }
+  .index a { color: var(--muted); text-decoration: none; padding: 6px 10px; border-radius: 6px; display: flex; justify-content: space-between; gap: 8px; }
+  .index a:hover { background: var(--brand-soft); color: var(--ink); }
+  .index a small { font-family: var(--f-mono); color: var(--brand); font-size: .72rem; }
+  .index .label { padding: 0 10px 8px; }
+
+  .pillar { padding-bottom: 56px; margin-bottom: 56px; border-bottom: 1px solid var(--line); scroll-margin-top: 20px; }
+  .pillar:last-child { border-bottom: 0; margin-bottom: 0; }
+  .p-head { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; flex-wrap: wrap; margin-bottom: 14px; }
+  .p-head h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); letter-spacing: -.015em; }
+  .weight { font-family: var(--f-mono); font-size: .8rem; color: var(--muted); }
+  .weight b { color: var(--brand); }
+  .intro { color: var(--muted); max-width: 68ch; margin-bottom: 26px; }
+  .split { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; margin-bottom: 24px; }
+  .track { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 22px; display: grid; gap: 12px; align-content: start; }
+  .track h3 { font-size: 1.15rem; }
+  .track p { color: var(--muted); font-size: .95rem; }
+  .owns { margin: 0; padding-left: 18px; display: grid; gap: 6px; font-size: .95rem; }
+
+  .tbl { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; min-width: 620px; font-size: .92rem; }
+  th, td { text-align: left; padding: 12px 16px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { font-family: var(--f-mono); font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); font-weight: 500; background: var(--bg); }
+  tr:last-child td { border-bottom: 0; }
+  td:first-child { font-weight: 600; }
+  .t { font-family: var(--f-mono); font-size: .85rem; white-space: nowrap; color: var(--ink); font-variant-numeric: tabular-nums; }
+
+  .note { margin-top: 20px; padding: 16px 18px; border-radius: 10px; background: var(--brand-soft); font-size: .95rem; display: grid; gap: 6px; }
+  .note strong { font-family: var(--f-display); }
+  .flags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+  .flag { font-size: .82rem; padding: 4px 10px; border-radius: 999px; background: var(--bad-soft); color: var(--bad); }
+  .chip { display: inline-block; font-family: var(--f-mono); font-size: .72rem; padding: 2px 8px; border-radius: 999px; font-weight: 500; }
+  .c-easy { background: var(--good-soft); color: var(--good); }
+  .c-med { background: var(--warn-soft); color: var(--warn); }
+  .c-hard { background: var(--bad-soft); color: var(--bad); }
+
+  .strikes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 20px; }
+  .strike { border: 1px solid var(--line); border-radius: 10px; padding: 16px; background: var(--surface); display: grid; gap: 6px; }
+  .strike b { font-family: var(--f-display); font-size: 1.05rem; }
+  .strike p { color: var(--muted); font-size: .9rem; }
+  .strike.last { border-color: var(--bad); }
+
+  .cols { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+  .col { font-family: var(--f-mono); font-size: .78rem; padding: 6px 10px; border: 1px dashed var(--line); border-radius: 6px; background: var(--surface); }
+  .col.new { border: 1px solid var(--brand); color: var(--brand); }
+
+  /* Scorecard */
+  .score { background: var(--band); color: var(--band-ink); }
+  .score .wrap { padding-block: 64px; }
+  .score h2 { font-size: clamp(1.7rem, 3.4vw, 2.4rem); margin: 10px 0 10px; }
+  .score .label { color: #8fa6ff; }
+  .score .sub { color: var(--band-muted); max-width: 64ch; margin-bottom: 30px; }
+  .sc-grid { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 28px; align-items: start; }
+  .sc-panel { background: var(--surface); color: var(--ink); border-radius: 14px; padding: 22px; }
+  .sc-top { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 18px; align-items: end; }
+  .sc-top label { display: grid; gap: 4px; font-size: .8rem; color: var(--muted); }
+  input, select { font: inherit; padding: 8px 10px; border-radius: 8px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); }
+  .row { display: grid; grid-template-columns: minmax(0, 1fr) 54px 150px 36px; gap: 12px; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--line); }
+  .row:last-child { border-bottom: 0; }
+  .row .nm { font-weight: 600; font-size: .95rem; }
+  .row .wt { font-family: var(--f-mono); font-size: .78rem; color: var(--muted); text-align: right; }
+  .row output { font-family: var(--f-mono); font-weight: 500; text-align: right; font-variant-numeric: tabular-nums; }
+  input[type="range"] { padding: 0; accent-color: var(--brand); width: 100%; }
+  .result { display: grid; gap: 18px; }
+  .big { font-family: var(--f-display); font-size: 4rem; font-weight: 800; line-height: 1; font-variant-numeric: tabular-nums; }
+  .big small { font-size: 1.2rem; color: var(--muted); font-weight: 600; }
+  .band-pill { display: inline-block; padding: 6px 14px; border-radius: 999px; font-weight: 600; font-size: .9rem; }
+  .bands { display: grid; gap: 6px; font-size: .88rem; color: var(--muted); }
+  .bands div { display: flex; justify-content: space-between; gap: 8px; }
+  .bands .t { color: var(--muted); }
+  .sc-btns { display: flex; gap: 10px; flex-wrap: wrap; }
+  button { font: inherit; font-weight: 600; padding: 10px 16px; border-radius: 8px; border: 1px solid var(--brand); background: var(--brand); color: #fff; cursor: pointer; }
+  button.ghost { background: transparent; color: var(--brand); }
+  .copied { font-size: .85rem; color: var(--good); min-height: 1.2em; }
+  .muted-note { font-size: .82rem; color: var(--muted); }
+
+  footer { color: var(--muted); font-size: .85rem; }
+  footer .wrap { padding-block: 28px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+
+  @media (max-width: 900px) {
+    .layout { grid-template-columns: minmax(0, 1fr); }
+    .index { position: static; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .index .label { grid-column: 1 / -1; }
+    .punch .wrap, .sc-grid { grid-template-columns: minmax(0, 1fr); }
+  }
+  @media (max-width: 620px) {
+    .split, .strikes { grid-template-columns: minmax(0, 1fr); }
+    .row { grid-template-columns: minmax(0, 1fr) 40px 36px; }
+    .row input[type="range"] { grid-column: 1 / -1; grid-row: 2; }
+    .topbar nav { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  html { scroll-behavior: smooth; }
+</style>
+</head>
+<body>
+
+<header class="mast">
+  <div class="wrap">
+    <div class="topbar">
+      <div class="brand">kevit<span>.</span> <span style="color:var(--band-muted);font-weight:600;font-size:.95rem">CSM Team</span></div>
+      <nav aria-label="Sections">
+        <a href="#onboarding">Onboarding</a>
+        <a href="#implementation">Implementation</a>
+        <a href="#support">Support</a>
+        <a href="#demos">Demos</a>
+        <a href="#scorecard">Scorecard</a>
+      </nav>
+    </div>
+    <p class="label">Customer Success · Responsibilities &amp; Performance</p>
+    <h1>Own it end to end. Be <em>proactive</em>, not reactive.</h1>
+    <p class="lede">This page defines what every member of the CSM team owns across Netcore and Chatomate accounts, how each responsibility is measured, and what good looks like. Your monthly review is scored against the eight pillars below.</p>
+    <div class="sla-row">
+      <div class="sla"><b>1 hr</b><span>WhatsApp reply SLA</span></div>
+      <div class="sla"><b>2 hrs</b><span>Email reply SLA</span></div>
+      <div class="sla"><b>3×</b><span>Max times a product gap is explained by the manager</span></div>
+      <div class="sla"><b>8</b><span>Pillars in the monthly scorecard</span></div>
+    </div>
+  </div>
+</header>
+
+<section class="punch">
+  <div class="wrap">
+    <div>
+      <p class="label">The ownership rule</p>
+      <h2 style="margin-top:10px">If a task is assigned to you, you own it until it is closed.</h2>
+    </div>
+    <ul>
+      <li>You are responsible for following up. Nobody should have to chase you for an update.</li>
+      <li>Do not wait to be given work. Find gaps in your accounts, bring ideas, and act on them.</li>
+      <li>Escalate early with a clear summary: what the issue is, whose side it is on, and what you have already checked.</li>
+      <li>Keep learning the product. Each month you should be able to handle something you could not handle last month.</li>
+    </ul>
+  </div>
+</section>
+
+<div class="wrap layout">
+  <aside class="index" aria-label="Pillars">
+    <p class="label">Pillars · weight</p>
+    <a href="#onboarding">Onboarding <small>15%</small></a>
+    <a href="#implementation">Implementation <small>20%</small></a>
+    <a href="#support">Support <small>20%</small></a>
+    <a href="#demos">Demos <small>10%</small></a>
+    <a href="#initiatives">Initiatives <small>10%</small></a>
+    <a href="#features">Feature knowledge <small>10%</small></a>
+    <a href="#communication">Communication <small>10%</small></a>
+    <a href="#campaigns">Campaigns <small>5%</small></a>
+  </aside>
+
+  <main>
+    <!-- 1 Onboarding -->
+    <section class="pillar" id="onboarding">
+      <div class="p-head"><h2>Onboarding</h2><span class="weight">Weight <b>15%</b></span></div>
+      <p class="intro">You get full ownership of onboarding for your account, whether it is a Netcore or a Chatomate client. The manager joins only when you escalate.</p>
+      <div class="split">
+        <div class="track">
+          <p class="label">Netcore onboarding</p>
+          <h3>Find the root cause early and escalate fast</h3>
+          <ul class="owns">
+            <li>Keep follow-ups with the client and Netcore to a minimum by asking for everything you need up front.</li>
+            <li>Decide early whether the issue is on our side or on Netcore's side.</li>
+            <li>Escalate to the manager or the Netcore team as soon as the blocker is clear. Do not let it sit.</li>
+          </ul>
+        </div>
+        <div class="track">
+          <p class="label">Chatomate onboarding</p>
+          <h3>Run the onboarding call on your own</h3>
+          <ul class="owns">
+            <li>Onboard the client through the admin panel and embedded signup.</li>
+            <li>Lead the onboarding call yourself, without the manager on the call.</li>
+            <li>Leave the client with a working account and clear next steps.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="tbl"><table>
+        <thead><tr><th>Metric</th><th>How it is measured</th><th>Target</th></tr></thead>
+        <tbody>
+          <tr><td>Follow-ups per onboarding</td><td>Count of follow-up messages or calls before the account goes live (Netcore)</td><td class="t">≤ 3</td></tr>
+          <tr><td>Time to root cause</td><td>Time from issue reported to a clear "our side / Netcore side" conclusion</td><td class="t">≤ 1 working day</td></tr>
+          <tr><td>Escalation time</td><td>Time from blocker identified to escalation to manager or Netcore</td><td class="t">≤ 2 hrs</td></tr>
+          <tr><td>Independent Chatomate calls</td><td>Share of onboarding calls completed without the manager</td><td class="t">100%</td></tr>
+          <tr><td>Embedded signup success</td><td>Onboardings completed through admin panel + embedded signup without rework</td><td class="t">≥ 90%</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <!-- 2 Implementation -->
+    <section class="pillar" id="implementation">
+      <div class="p-head"><h2>Implementation</h2><span class="weight">Weight <b>20%</b></span></div>
+      <p class="intro">The flows and chatbots you build are what the client sees every day. Quality here is measured by how few mistakes reach the client and how satisfied they are with the result.</p>
+      <div class="tbl"><table>
+        <thead><tr><th>Metric</th><th>How it is measured</th><th>Target</th></tr></thead>
+        <tbody>
+          <tr><td>Flow mistakes</td><td>Errors found in the flow after handover (wrong logic, broken buttons, typos, missing paths)</td><td class="t">0 critical, ≤ 2 minor</td></tr>
+          <tr><td>Client complaints in group</td><td>Complaints raised by the client in the WhatsApp group per month</td><td class="t">≤ 1</td></tr>
+          <tr><td>Escalations</td><td>Times the issue was escalated to the manager by the client or team</td><td class="t">≤ 1 / month</td></tr>
+          <tr><td>Customer satisfaction</td><td>CSAT after go-live (1–5 rating from the client)</td><td class="t">≥ 4.5</td></tr>
+          <tr><td>Chatbot quality</td><td>Manager review: tone, structure, fallbacks, edge cases, use of the right features</td><td class="t">≥ 4 / 5</td></tr>
+          <tr><td>Demo bot quality</td><td>Manager review of demo bots built for the account</td><td class="t">≥ 4 / 5</td></tr>
+        </tbody>
+      </table></div>
+      <div class="flags" aria-label="Red flags">
+        <span class="flag">Client finds the bug before you do</span>
+        <span class="flag">Same mistake repeated on two flows</span>
+        <span class="flag">Complaint in group with no reply within SLA</span>
+      </div>
+    </section>
+
+    <!-- 3 Support -->
+    <section class="pillar" id="support">
+      <div class="p-head"><h2>Support</h2><span class="weight">Weight <b>20%</b></span></div>
+      <p class="intro">Every support ticket has one owner and a clock. From now on the support tracker records how many hours each ticket took and who owns it, so turnaround and waiting time can be measured per person and per platform.</p>
+      <div class="split">
+        <div class="track">
+          <p class="label">Tracker update · Priyanshi</p>
+          <h3>Two new columns in the support sheet</h3>
+          <p>Priyanshi adds these for her own tickets and for the team's tickets, starting now.</p>
+          <div class="cols">
+            <span class="col new">Hours to resolve</span>
+            <span class="col new">Ticket owner</span>
+          </div>
+        </div>
+        <div class="track">
+          <p class="label">Split by source</p>
+          <h3>Every ticket is tagged by platform</h3>
+          <p>Report each metric separately for each source so we can see where the load and the delays come from.</p>
+          <div class="cols">
+            <span class="col">Netcore</span><span class="col">TTL</span><span class="col">Chatomate</span>
+          </div>
+        </div>
+      </div>
+      <p class="label" style="margin-bottom:10px">Full tracker columns</p>
+      <div class="cols" style="margin:0 0 24px">
+        <span class="col">Ticket ID</span><span class="col">Client</span><span class="col">Source</span><span class="col">Issue summary</span><span class="col">Raised on</span><span class="col">First response at</span><span class="col new">Ticket owner</span><span class="col">Escalated at</span><span class="col">Escalated to</span><span class="col">Pending with</span><span class="col">Status</span><span class="col">Resolved on</span><span class="col new">Hours to resolve</span><span class="col">Days customer waiting</span>
+      </div>
+      <div class="tbl"><table>
+        <thead><tr><th>Metric</th><th>How it is measured</th><th>Target</th></tr></thead>
+        <tbody>
+          <tr><td>SLA adherence</td><td>Tickets with first response within SLA (WhatsApp 1 hr, email 2 hrs)</td><td class="t">≥ 95%</td></tr>
+          <tr><td>Turnaround time (TAT)</td><td>Raised on → Resolved on, by source (Netcore / TTL / Chatomate)</td><td class="t">Report by source</td></tr>
+          <tr><td>Hours to resolve</td><td>Working hours the owner spent on the ticket</td><td class="t">Tracked per owner</td></tr>
+          <tr><td>Escalation time</td><td>Raised on → Escalated at, when escalation is needed</td><td class="t">≤ 2 hrs</td></tr>
+          <tr><td>Customer waiting days</td><td>Days the customer has waited while the ticket is pending with engineering</td><td class="t">Updated daily</td></tr>
+        </tbody>
+      </table></div>
+      <div class="note"><strong>Pending with engineering is still your ticket.</strong> Update the client with a status at least once a day, record the waiting days, and push engineering for an ETA.</div>
+    </section>
+
+    <!-- 4 Demos -->
+    <section class="pillar" id="demos">
+      <div class="p-head"><h2>Demos</h2><span class="weight">Weight <b>10%</b></span></div>
+      <p class="intro">A good demo answers the client's actual requirement. You should be able to prepare and run it without help from the team, and without the manager having to ask clarifying questions afterwards.</p>
+      <div class="tbl"><table>
+        <thead><tr><th>Metric</th><th>How it is measured</th><th>Target</th></tr></thead>
+        <tbody>
+          <tr><td>Requirement fulfilled independently</td><td>Demo covered the client's requirement without help from the team</td><td class="t">Yes on every demo</td></tr>
+          <tr><td>Questions from manager</td><td>Clarifying questions the manager had to ask about the demo</td><td class="t">≤ 2 per demo</td></tr>
+          <tr><td>Demos taken</td><td>Number of demos run in the month</td><td class="t">Tracked</td></tr>
+          <tr><td>Outcome</td><td>Recorded result: converted, next step agreed, on hold, or lost (with reason)</td><td class="t">Logged for 100%</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <!-- 5 Initiatives -->
+    <section class="pillar" id="initiatives">
+      <div class="p-head"><h2>Initiatives</h2><span class="weight">Weight <b>10%</b></span></div>
+      <p class="intro">This pillar rewards work nobody asked you to do. Use your own skills to improve an account, the team's process, or the product, and log it.</p>
+      <div class="split">
+        <div class="track">
+          <h3>What counts</h3>
+          <ul class="owns">
+            <li>A new use case or upsell idea pitched to a client</li>
+            <li>A template, checklist, or document the team can reuse</li>
+            <li>A quick fix or automation that saves time</li>
+            <li>A product improvement raised with evidence</li>
+          </ul>
+        </div>
+        <div class="track">
+          <h3>How it is measured</h3>
+          <ul class="owns">
+            <li>Number of initiatives logged per month (target ≥ 2)</li>
+            <li>Of those, how many came from you and not from an assignment</li>
+            <li>Quick wins delivered within the same week</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6 Feature knowledge -->
+    <section class="pillar" id="features">
+      <div class="p-head"><h2>Feature knowledge</h2><span class="weight">Weight <b>10%</b></span></div>
+      <p class="intro">Every team member must know every Chatomate feature. When a client asks for something, your answer has to be correct.</p>
+      <div class="split">
+        <div class="track">
+          <h3>When you say "yes, it's available"</h3>
+          <p>It must actually exist and work the way you described. A wrong "yes" counts as a mistake.</p>
+        </div>
+        <div class="track">
+          <h3>When you say "no"</h3>
+          <p>Escalate it to the manager as a possible product gap, with the client's exact requirement.</p>
+        </div>
+      </div>
+      <p class="label" style="margin-bottom:10px">Feature difficulty</p>
+      <div class="tbl"><table>
+        <thead><tr><th>Level</th><th>Meaning</th><th>Expectation</th></tr></thead>
+        <tbody>
+          <tr><td><span class="chip c-easy">Easy</span></td><td>Standard features used in most accounts</td><td>Answer and configure on your own, immediately</td></tr>
+          <tr><td><span class="chip c-med">Medium</span></td><td>Features that need setup or integration knowledge</td><td>Answer correctly; configure with documentation</td></tr>
+          <tr><td><span class="chip c-hard">Hard</span></td><td>Advanced or custom features, APIs, complex logic</td><td>Know what is possible; escalate implementation details</td></tr>
+        </tbody>
+      </table></div>
+      <div class="strikes">
+        <div class="strike"><span class="label">Explanation 1</span><b>Manager explains</b><p>The product gap or feature is explained in full.</p></div>
+        <div class="strike"><span class="label">Explanation 2</span><b>Manager explains again</b><p>Take notes. It should now be in your knowledge base.</p></div>
+        <div class="strike last"><span class="label">Explanation 3</span><b>Last time</b><p>After the third explanation of the same feature, you are expected to answer it yourself.</p></div>
+      </div>
+    </section>
+
+    <!-- 7 Communication -->
+    <section class="pillar" id="communication">
+      <div class="p-head"><h2>Communication</h2><span class="weight">Weight <b>10%</b></span></div>
+      <p class="intro">How you write is how the client sees Kevit. Replies should be polite, clear, and on time.</p>
+      <div class="tbl"><table>
+        <thead><tr><th>Channel</th><th>What is reviewed</th><th>SLA / target</th></tr></thead>
+        <tbody>
+          <tr><td>Email</td><td>Politeness, clear subject, structure, correct facts, proper closing</td><td class="t">Reply ≤ 2 hrs</td></tr>
+          <tr><td>WhatsApp</td><td>Quality of replies, tone, completeness, response time</td><td class="t">Reply ≤ 1 hr</td></tr>
+          <tr><td>Manager tags</td><td>Number of times the manager had to tag you to get a response or action</td><td class="t">0 is the goal</td></tr>
+        </tbody>
+      </table></div>
+      <div class="note"><strong>Every manager tag is a missed follow-up.</strong> If the manager has to tag you in a client group, that thread should already have had your reply.</div>
+    </section>
+
+    <!-- 8 Campaigns -->
+    <section class="pillar" id="campaigns">
+      <div class="p-head"><h2>Campaign managed service</h2><span class="weight">Weight <b>5%</b></span></div>
+      <p class="intro">For accounts on the managed campaign service, you plan and run the campaigns.</p>
+      <div class="tbl"><table>
+        <thead><tr><th>Metric</th><th>How it is measured</th><th>Target</th></tr></thead>
+        <tbody>
+          <tr><td>Campaigns per week</td><td>Number of campaigns executed per week across managed accounts</td><td class="t">Set per account</td></tr>
+          <tr><td>On-time launch</td><td>Campaigns sent on the agreed date and time</td><td class="t">100%</td></tr>
+          <tr><td>Campaign errors</td><td>Wrong audience, template, or content sent</td><td class="t">0</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+  </main>
+</div>
+
+<section class="score" id="scorecard">
+  <div class="wrap">
+    <p class="label">Monthly scorecard</p>
+    <h2>Rate each pillar from 1 to 5</h2>
+    <p class="sub">Use this during the monthly review. Each rating is multiplied by the pillar weight to give a score out of 100. The ratings shown below are an example; they are saved in your browser only.</p>
+    <div class="sc-grid">
+      <div class="sc-panel">
+        <div class="sc-top">
+          <label for="sc-name">Team member<input id="sc-name" type="text" placeholder="Name"></label>
+          <label for="sc-month">Month<input id="sc-month" type="month"></label>
+        </div>
+        <div id="rows"></div>
+      </div>
+      <div class="sc-panel result">
+        <div>
+          <p class="label">Weighted score</p>
+          <div class="big"><span id="total">0</span><small> / 100</small></div>
+        </div>
+        <div><span id="pill" class="band-pill">–</span></div>
+        <div class="bands">
+          <div><span>Exceeds expectations</span><span class="t">85–100</span></div>
+          <div><span>Meets expectations</span><span class="t">70–84</span></div>
+          <div><span>Needs improvement</span><span class="t">50–69</span></div>
+          <div><span>Performance plan</span><span class="t">below 50</span></div>
+        </div>
+        <div class="sc-btns">
+          <button id="copy" type="button">Copy summary</button>
+          <button id="reset" type="button" class="ghost">Reset to 3s</button>
+        </div>
+        <p class="copied" id="copied" aria-live="polite"></p>
+        <p class="muted-note">Rating guide: 5 beats every target, 4 meets all targets, 3 misses one target, 2 misses several, 1 needed constant follow-up.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>Kevit · Customer Success team charter</span>
+    <span>WhatsApp SLA 1 hr · Email SLA 2 hrs</span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var pillars = [
+    ["onboarding", "Onboarding", 15, 4],
+    ["implementation", "Implementation", 20, 4],
+    ["support", "Support", 20, 3],
+    ["demos", "Demos", 10, 4],
+    ["initiatives", "Initiatives", 10, 3],
+    ["features", "Feature knowledge", 10, 4],
+    ["communication", "Communication", 10, 4],
+    ["campaigns", "Campaigns", 5, 5]
+  ];
+  var KEY = "csm-scorecard-v1";
+  var saved = {};
+  try { saved = JSON.parse(localStorage.getItem(KEY) || "{}") || {}; } catch (e) { saved = {}; }
+  var rows = document.getElementById("rows");
+  pillars.forEach(function (p) {
+    var v = saved[p[0]] || p[3];
+    var row = document.createElement("div");
+    row.className = "row";
+    row.innerHTML = '<label class="nm" for="r-' + p[0] + '">' + p[1] + '</label>' +
+      '<span class="wt">' + p[2] + '%</span>' +
+      '<input id="r-' + p[0] + '" type="range" min="1" max="5" step="1" value="' + v + '">' +
+      '<output id="o-' + p[0] + '">' + v + '</output>';
+    rows.appendChild(row);
+  });
+  var name = document.getElementById("sc-name"), month = document.getElementById("sc-month");
+  if (saved.name) name.value = saved.name;
+  month.value = saved.month || "2026-10";
+
+  function bandFor(s) {
+    if (s >= 85) return ["Exceeds expectations", "var(--good-soft)", "var(--good)"];
+    if (s >= 70) return ["Meets expectations", "var(--brand-soft)", "var(--brand)"];
+    if (s >= 50) return ["Needs improvement", "var(--warn-soft)", "var(--warn)"];
+    return ["Performance plan", "var(--bad-soft)", "var(--bad)"];
+  }
+  function score() {
+    var total = 0, state = { name: name.value, month: month.value };
+    pillars.forEach(function (p) {
+      var v = +document.getElementById("r-" + p[0]).value;
+      document.getElementById("o-" + p[0]).textContent = v;
+      total += (v / 5) * p[2];
+      state[p[0]] = v;
+    });
+    total = Math.round(total);
+    document.getElementById("total").textContent = total;
+    var b = bandFor(total), pill = document.getElementById("pill");
+    pill.textContent = b[0]; pill.style.background = b[1]; pill.style.color = b[2];
+    try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+    return total;
+  }
+  document.querySelector(".sc-grid").addEventListener("input", score);
+  document.getElementById("reset").addEventListener("click", function () {
+    pillars.forEach(function (p) { document.getElementById("r-" + p[0]).value = 3; });
+    score();
+  });
+  document.getElementById("copy").addEventListener("click", function () {
+    var t = score();
+    var lines = ["CSM scorecard – " + (name.value || "Team member") + " – " + month.value];
+    pillars.forEach(function (p) { lines.push(p[1] + " (" + p[2] + "%): " + document.getElementById("r-" + p[0]).value + "/5"); });
+    lines.push("Total: " + t + "/100 – " + bandFor(t)[0]);
+    var text = lines.join("\n"), msg = document.getElementById("copied");
+    function fallback() { msg.textContent = "Copy is blocked here. Select the ratings manually."; }
+    try {
+      navigator.clipboard.writeText(text).then(function () { msg.textContent = "Summary copied."; }, fallback);
+    } catch (e) { fallback(); }
+  });
+  score();
+})();
+</script>
+</body>
+</html>
